@@ -230,9 +230,8 @@ class Chart(_Nvd3Customizable):
         }}""")
     name = "chart"
 
-    def __init__(self, data):
+    def __init__(self):
         _Nvd3Customizable.__init__(self)
-        self.data = data
         self.container_id = "nvd3_chart_" + str(random.randint(0, 2**10))
 
     def js(self):
@@ -284,8 +283,8 @@ class PieChart(Chart):
         # "dispatch"
     )
 
-    def __init__(self, data):
-        Chart.__init__(self, data)
+    def __init__(self):
+        Chart.__init__(self)
         self.factory = "pieChart"
         self.tooltip = Tooltip()
         self.pie = Pie()

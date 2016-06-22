@@ -48,12 +48,12 @@ class TestCustomizable(unittest.TestCase):
 class TestPieChart(unittest.TestCase):
 
     def test_pie(self):
-        chart = nvd3.PieChart([1, 2, 3])
+        chart = nvd3.PieChart()
         chart.pie.width(400)
         self.assertEqual(chart.pie._options["width"], "400")
 
     def test_set_pie_option(self):
-        chart = nvd3.PieChart([1, 2, 3])
+        chart = nvd3.PieChart()
         chart.pie.width(400)
         rendered = chart.js()
         self.assertIn("chart.pie.width(400)", rendered)
