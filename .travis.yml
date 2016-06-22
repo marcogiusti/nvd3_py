@@ -5,7 +5,11 @@ python:
 
 install:
     - pip install -U pip
+    - pip install -U coverage coveralls
     - python setup.py install
 
 script:
-    - python setup.py test
+    - coverage run --source nvd3 -m unittest test_nvd3
+
+after_success:
+    - coveralls
