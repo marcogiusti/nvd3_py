@@ -1,0 +1,15 @@
+*.pyc
+.*.sw?
+*~
+
+# setuptool specific
+/build/
+/dist/
+/*.egg-info/
+
+# coverage
+.coverage
+/htmlcov/
+
+# jupyter notebooks
+.ipynb_checkpoints/

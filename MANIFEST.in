@@ -1,0 +1,1 @@
+include README.rst LICENSE test_nvd3.py .travis.yml
