@@ -265,14 +265,6 @@ class PieChart(Chart):
         "y",
         "color",
         "labelType",
-
-        # // depreciated after 1.7.1
-        # pieLabelsOutside: {get: function(){return labelsOutside;}, set: function(_){
-        # // depreciated after 1.7.1
-        # donutLabelsOutside: {get: function(){return labelsOutside;}, set: function(_){
-        # // deprecated after 1.7.1
-        # labelFormat: {get: function(){ return valueFormat;}, set: function(_) {
-        # // options that require extra logic in the setter
     )
     _raw_options = (
         "x",
@@ -299,36 +291,67 @@ class Container(object):
 
     tpl = ('<div id="{self.chart.container_id}">'
            '<svg style="height:500px;width:400px"></svg>'
-           '</div>')
+           '</div>'
+           '<script>{jscode}</script>')
 
     def __init__(self, chart, data_supplier):
         self.chart = chart
         self.data_supplier = data_supplier
 
-    def html(self, chart):
+    def html(self):
+        code = self.data_supplier.js(self.chart)
+        return self.tpl.format(self=self, jscode=code)
+
+    def js(self):
+        return ('<script src="' + D3 + '"></script>\n'
+                '<script src="' + NVD3 + '"></script>')
+
+    def css(self):
+        t = '<link rel="stylesheet" type="text/css" href="' + NVD3_CSS + '"/>'
+        return t
+
+
+class IPythonContainer(object):
+
+    tpl = textwrap.dedent("""\
+            <div id="{self.chart.container_id}">
+                <svg style="height:500px;width:400px"></svg>
+            </div>
+            """)
+
+    def __init__(self, chart, data_supplier):
+        self.chart = chart
+        self.data_supplier = data_supplier
+
+    def html(self):
         return self.tpl.format(self=self)
+
+    def js(self):
+        return self.data_supplier.js(self.chart)
 
     def _ipython_display_(self):
         from IPython.display import display_javascript, display_html
         from IPython.display import Javascript
 
-        display_html(self.html(self.chart), raw=True)
-        js = Javascript(data=self.data_supplier.js(self.chart), lib=[D3, NVD3],
-                        css=[NVD3_CSS])
-        display_javascript(js)
+        jscode = self.js()
+        display_javascript(Javascript(jscode, lib=[D3, NVD3], css=[NVD3_CSS]))
+        display_html(self.html(), raw=True)
+
+
+def render_data_supplier(self, chart):
+    return self.tpl.format(self=self, chart=chart, factory=chart.js())
 
 
 class StaticDataSupplier(object):
 
     tpl = textwrap.dedent("""\
         nv.addGraph(function() {{
-            var data_{chart.name} = {data};
+            var data_{chart.name} = {self.data};
             ({factory})(data_{chart.name});
         }});""")
 
     def __init__(self, data):
-        self.data = data
+        self.data = json.dumps(data)
 
     def js(self, chart):
-        data = json.dumps(self.data)
-        return self.tpl.format(data=data, chart=chart, factory=chart.js())
+        return render_data_supplier(self, chart)
