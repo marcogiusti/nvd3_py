@@ -355,3 +355,21 @@ class StaticDataSupplier(object):
 
     def js(self, chart):
         return render_data_supplier(self, chart)
+
+
+class JsonDataSupplier(object):
+
+    tpl = textwrap.dedent("""\
+        d3.json('{self.url}', function(error, data) {{
+            {self.error_handler}
+            nv.addGraph(function() {{
+                return ({factory})(data);
+            }});
+        }});""")
+
+    def __init__(self, url, error_handler=""):
+        self.url = url
+        self.error_handler = error_handler
+
+    def js(self, chart):
+        return render_data_supplier(self, chart)
