@@ -2,6 +2,9 @@
 NVD3 for Python
 ===============
 
+.. image:: https://travis-ci.org/marcogiusti/nvd3_py.svg?branch=master
+    :target: https://travis-ci.org/marcogiusti/nvd3_py
+
 This package is still very sperimental. Look at piechart.ipynb for an
 example of use.
 
