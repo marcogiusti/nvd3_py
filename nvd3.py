@@ -31,7 +31,8 @@ class _Nvd3Customizable(object):
     _option_names = ()
     _raw_options = ()
 
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self._options = {}
 
     def __getattr__(self, name):
@@ -96,9 +97,22 @@ class Axis(_Nvd3Customizable):
         "scale",
         # "dispatch",
         # "isOrdinal",
+
+        # TODO: check
+        "orient",
+        "tickValues",
+        "tickSubdivide",
+        "tickSize",
+        "tickPadding",
+        "tickFormat",
+        "domain",
+        "range",
+        "rangeBand",
+        "rangeBands",
     )
     _raw_options = (
         "scale",
+        "tickFormat",
     )
 
 
@@ -145,7 +159,6 @@ class Tooltip(_Nvd3Customizable):
         "headerEnabled",
         "position",
     )
-    name = "chart.tooltip"
 
 
 class Focus(_Nvd3Customizable):
@@ -210,7 +223,6 @@ class Pie(_Nvd3Customizable):
         "valueFormat",
         "dispatch",
     )
-    name = "chart.pie"
 
 
 class Chart(_Nvd3Customizable):
@@ -228,10 +240,9 @@ class Chart(_Nvd3Customizable):
 
             return {self.name};
         }}""")
-    name = "chart"
 
     def __init__(self):
-        _Nvd3Customizable.__init__(self)
+        _Nvd3Customizable.__init__(self, name="chart")
         self.container_id = "nvd3_chart_" + str(random.randint(0, 2**10))
 
     def js(self):
@@ -278,8 +289,8 @@ class PieChart(Chart):
     def __init__(self):
         Chart.__init__(self)
         self.factory = "pieChart"
-        self.tooltip = Tooltip()
-        self.pie = Pie()
+        self.tooltip = Tooltip(self.name + ".tooltip")
+        self.pie = Pie(self.name + ".pie")
 
     def js_options(self):
         return "\n".join([Chart.js_options(self),
@@ -287,16 +298,95 @@ class PieChart(Chart):
                           self.pie.js_options()])
 
 
+class LineChart(Chart):
+
+    _option_names = (
+        "width",
+        "height",
+        "showLegend",
+        "legendPosition",
+        "showXAxis",
+        "showYAxis",
+        "rightAlignYAxis",
+        "useInteractiveGuideline",
+        "x",
+        "y",
+        "focusEnable",
+        # "defaultState",
+        "noData",
+        # "focusHeight",
+        # "focusShowAxisX",
+        # "focusShowAxisY",
+        # "brushExtent",
+        "focusMargin",
+        "margin",
+        "duration",
+        # "color",
+        # "interpolate",
+        "xTickFormat",
+        "yTickFormat",
+    )
+    _raw_options = (
+        "x",
+        "y",
+        "noData",
+        # "color",
+        "xTickFormat",
+        "yTickFormat",
+    )
+    factory = "lineChart"
+
+    def __init__(self):
+        Chart.__init__(self)
+        self.xaxis = Axis(self.name + ".xAxis")
+        self.yaxis = Axis(self.name + ".yAxis")
+        self.legend = Legend(self.name + ".legend")
+        # self.interactive_layer = InteractiveGuideLine()
+        self.tooltip = Tooltip(self.name + ".tooltip")
+        # self.focus = Focus(Line())
+
+    def js_options(self):
+        return "\n".join([Chart.js_options(self),
+                          self.xaxis.js_options(),
+                          self.yaxis.js_options(),
+                          self.legend.js_options(),
+                          # self.interactive_layer.js_options(),
+                          self.tooltip.js_options(),
+                          # self.focus.js_options(),
+                         ])
+
+
+def _str_dimention(val):
+    val = str(val)
+    if not val.endswith(("%", "px")):
+        val += "px"
+    return val
+
+
+def style_dimentions(width=None, height=None):
+    style = w = h = ""
+    if width is not None:
+        width = _str_dimention(width)
+        w = "width:{0};".format(width)
+    if height is not None:
+        height = _str_dimention(height)
+        h = "height:{0};".format(height)
+    if w or h:
+        style = 'style="{w}{h}"'.format(w=w, h=h)
+    return style
+
+
 class Container(object):
 
     tpl = ('<div id="{self.chart.container_id}">'
-           '<svg style="height:500px;width:400px"></svg>'
+           '<svg {self.style}></svg>'
            '</div>'
            '<script>{jscode}</script>')
 
-    def __init__(self, chart, data_supplier):
+    def __init__(self, chart, data_supplier, width=400, height=500):
         self.chart = chart
         self.data_supplier = data_supplier
+        self.style = style_dimentions(width, height)
 
     def html(self):
         code = self.data_supplier.js(self.chart)
@@ -315,13 +405,14 @@ class IPythonContainer(object):
 
     tpl = textwrap.dedent("""\
             <div id="{self.chart.container_id}">
-                <svg style="height:500px;width:400px"></svg>
+                <svg {self.style}></svg>
             </div>
             """)
 
-    def __init__(self, chart, data_supplier):
+    def __init__(self, chart, data_supplier, width=None, height=None):
         self.chart = chart
         self.data_supplier = data_supplier
+        self.style = style_dimentions(width, height)
 
     def html(self):
         return self.tpl.format(self=self)
