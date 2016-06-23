@@ -6,7 +6,7 @@ Reference
 _Nvd3Customizable
 =================
 
-.. class:: _Nvd3Customizable(name)
+.. class:: nvd3._Nvd3Customizable(name)
 
    This class represent a model in NVS3. A model in NVD3 is an object
    with some settable options. These options are callables, to be more
@@ -38,7 +38,7 @@ _Nvd3Customizable
 Base models
 ===========
 
-.. class:: Line(name)
+.. class:: nvd3.Line(name)
 
    Represents a ``nv.models.line()`` in NVD3. Available properties:
       
@@ -54,7 +54,7 @@ Base models
    - ``y``
    - ``color``
 
-.. class:: Axis(name)
+.. class:: nvd3.Axis(name)
 
    Represents a ``nv.models.axis()`` in NVD3. Available properties:
 
@@ -84,7 +84,7 @@ Base models
    - ``rangeBand``
    - ``rangeBands``
 
-.. class:: Legend(name)
+.. class:: nvd3.Legend(name)
 
    Represents a ``nv.models.legend()`` in NVD3. Available properties:
 
@@ -103,7 +103,7 @@ Base models
    - ``color``
    - ``updateState``
 
-.. class:: Tooltip(name)
+.. class:: nvd3.Tooltip(name)
 
    Represents a ``nv.models.tooltip()`` in NVD3. Available properties:
 
@@ -121,7 +121,7 @@ Base models
    - ``headerEnabled``
    - ``position``
 
-.. class:: Focus(name)
+.. class:: nvd3.Focus(name)
 
    Represents a ``nv.models.focus()`` in NVD3. Available properties:
 
@@ -140,7 +140,7 @@ Base models
    - ``y``
    - ``rightAlignYAxis``
 
-.. class:: Pie(name)
+.. class:: nvd3.Pie(name)
 
    Represents a ``nv.models.pie()`` in NVD3. Available properties:
 
@@ -172,7 +172,7 @@ Base models
 Charts
 ======
 
-.. class:: Chart()
+.. class:: nvd3.Chart()
 
    Chart base class. Instantiate the object and set the various
    properties.
@@ -183,7 +183,7 @@ Charts
       The whole code is enveloped in a function that accept the data of
       the chart and return the chart object.
 
-.. class:: PieChart()
+.. class:: nvd3.PieChart()
 
    Represents a ``nv.models.pieChart()`` in NVD3. Available properties:
 
@@ -211,7 +211,7 @@ Charts
    - ``color``
    - ``labelType``
 
-.. class:: LineChart()
+.. class:: nvd3.LineChart()
 
    Represents a ``nv.models.lineChart()`` in NVD3. Available properties:
 

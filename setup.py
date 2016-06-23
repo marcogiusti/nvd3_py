@@ -32,6 +32,7 @@ setup(name="nvd3_py",
       license="MIT",
       test_suite="test_nvd3",
       py_modules=["nvd3"],
+      packages=["django_nvd3", "django_nvd3.templatetags"],
       classifiers=[
           "Development Status :: 1 - Planning",
           "Intended Audience :: Developers",

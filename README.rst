@@ -5,9 +5,12 @@ NVD3 for Python
 |travis|
 |coveralls|
 
-This package is an attempt to build NVD3 charts from python. The API
+This module is an attempt to build NVD3 charts from python. The API
 mimics the NVD3's one, for an example of use look at
 `examples/pie_chart.ipynb`_.
+
+The project includes also a django app that implements few tags to help
+using nvd3 within Django.
 
 
 Install

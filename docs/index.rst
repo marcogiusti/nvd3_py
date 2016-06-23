@@ -108,6 +108,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   django
    reference
    examples/index
 
