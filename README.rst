@@ -39,6 +39,6 @@ details.
 .. |coveralls| image:: https://coveralls.io/repos/github/marcogiusti/nvd3_py/badge.svg?branch=master
    :target: https://coveralls.io/github/marcogiusti/nvd3_py?branch=mast
 
-.. |rtfd| .. image:: https://readthedocs.org/projects/nvd3-py/badge/?version=latest
+.. |rtfd| image:: https://readthedocs.org/projects/nvd3-py/badge/?version=latest
    :target: http://nvd3-py.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
