@@ -1,1 +1,5 @@
 include README.rst LICENSE test_nvd3.py .travis.yml
+graft docs
+prune docs/_build
+graft examples
+prune examples/.ipynb_checkpoints
