@@ -6,7 +6,7 @@ NVD3 for Python
 |coveralls|
 
 This package is an attempt to build NVD3 charts from python. The API
-mimic the NVD3's ones, for an example of use look at
+mimics the NVD3's one, for an example of use look at
 `examples/pie_chart.ipynb`_.
 
 
@@ -34,6 +34,3 @@ details.
 
 .. |coveralls| image:: https://coveralls.io/repos/github/marcogiusti/nvd3_py/badge.svg?branch=master
    :target: https://coveralls.io/github/marcogiusti/nvd3_py?branch=mast
-
-
-.. vim:tw=72:
