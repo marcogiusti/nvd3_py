@@ -13,31 +13,30 @@ class MyCls(nvd3._Nvd3Customizable):
 
     _option_names = ("a", "b")
     _raw_options = ("a", )
-    name = "myobj"
 
 
 class TestCustomizable(unittest.TestCase):
 
     def test_invalid_option(self):
-        obj = MyCls()
+        obj = MyCls("myobj")
         with self.assertRaises(AttributeError):
             obj.c
 
     def test_set_raw(self):
-        obj = MyCls()
+        obj = MyCls("myobj")
         f = "function() { alert(boom); }"
         obj.a(f)
         self.assertEqual(obj._options["a"], f)
 
     def test_set_data(self):
-        obj = MyCls()
+        obj = MyCls("myobj")
         m = {"a": 42}
         obj.b(m)
         self.assertIsInstance(obj._options["b"], str)
         self.assertEqual(json.loads(obj._options["b"]), m)
 
     def test_js_options(self):
-        obj = MyCls()
+        obj = MyCls("myobj")
         obj.a("() => alert('boom')")
         obj.b({"a": 42})
         exp = "myobj.a(() => alert('boom'));\nmyobj.b({\"a\": 42});"
