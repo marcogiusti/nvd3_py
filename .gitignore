@@ -13,3 +13,6 @@
 
 # jupyter notebooks
 .ipynb_checkpoints/
+
+# doc
+/docs/_build/
