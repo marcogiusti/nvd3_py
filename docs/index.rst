@@ -108,9 +108,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   examples/index
    django
    reference
-   examples/index
 
 
 .. _NVD3: http://nvd3.org/
