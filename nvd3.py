@@ -434,6 +434,18 @@ class MultiBarChart(Chart):
         self.controls = Legend(self.name + ".controls")
         self.tooltip = Tooltip(self.name + ".tooltip")
 
+    def js_options(self):
+        return "\n".join([Chart.js_options(self),
+                          self.multibar.js_options(),
+                          self.xaxis.js_options(),
+                          self.yaxis.js_options(),
+                          self.interactive_layer.js_options(),
+                          self.legend.js_options(),
+                          self.controls.js_options(),
+                          self.tooltip.js_options(),
+                         ])
+
+
 
 def _str_dimention(val):
     val = str(val)
