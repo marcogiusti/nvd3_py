@@ -26,7 +26,7 @@ class Setter(object):
         self.mapping[self.attr] = str(value) if self.raw else json.dumps(value)
 
 
-class _Nvd3Customizable(object):
+class _Model(object):
 
     _option_names = ()
     _raw_options = ()
@@ -47,6 +47,9 @@ class _Nvd3Customizable(object):
         for opt, value in self._options.iteritems():
             lines.append("{name}.{opt}({value});".format(**locals()))
         return "\n".join(lines)
+
+
+_Nvd3Customizable = _Model
 
 
 class Line(_Nvd3Customizable):
@@ -225,6 +228,45 @@ class Pie(_Nvd3Customizable):
     )
 
 
+class MultiBar(_Model):
+
+    _option_names = (
+        "width",
+        "height",
+        "x",
+        "y",
+        "xScale",
+        "yScale",
+        "xDomain",
+        "yDomain",
+        "xRange",
+        "yRange",
+        "forceY",
+        "stacked",
+        "stackOffset",
+        "clipEdge",
+        "disabled",
+        "id",
+        "hideable",
+        "groupSpacing",
+        "fillOpacity",
+        "margin",
+        "duration",
+        "color",
+        "barColor",
+    )
+    _raw_options = (
+        "x",
+        "y",
+    )
+
+
+class InteractiveGuideline(_Model):
+
+    _option_names = ()
+    _raw_options = ()
+
+
 class Chart(_Nvd3Customizable):
     # Abstract class
 
@@ -354,6 +396,43 @@ class LineChart(Chart):
                           self.tooltip.js_options(),
                           # self.focus.js_options(),
                          ])
+
+
+class MultiBarChart(Chart):
+
+    _option_names = (
+        "width",
+        "height",
+        "showLegend",
+        "showControls",
+        "controlLabels",
+        "showXAxis",
+        "showYAxis",
+        "defaultState",
+        "noData",
+        "reduceXTicks",
+        "rotateLabels",
+        "staggerLabels",
+        "wrapLabels",
+        "margin",
+        "duration",
+        "color",
+        "rightAlignYAxis",
+        "useInteractiveGuideline",
+        "barColor",
+    )
+    factory = "multiBarChart"
+
+    def __init__(self):
+        Chart.__init__(self)
+        self.multibar = MultiBar(self.name + ".multibar")
+        self.xaxis = Axis(self.name + ".xAxis")
+        self.yaxis = Axis(self.name + ".yAxis")
+        self.interactive_layer = InteractiveGuideline(self.name +
+                                                      ".interactiveLayer")
+        self.legend = Legend(self.name + ".legend")
+        self.controls = Legend(self.name + ".controls")
+        self.tooltip = Tooltip(self.name + ".tooltip")
 
 
 def _str_dimention(val):
