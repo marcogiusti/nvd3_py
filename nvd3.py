@@ -49,10 +49,7 @@ class _Model(object):
         return "\n".join(lines)
 
 
-_Nvd3Customizable = _Model
-
-
-class Line(_Nvd3Customizable):
+class Line(_Model):
 
     _option_names = (
         # TODO: scatter
@@ -81,7 +78,7 @@ class Line(_Nvd3Customizable):
     )
 
 
-class Axis(_Nvd3Customizable):
+class Axis(_Model):
 
     _option_names = (
         "axisLabelDistance",
@@ -118,7 +115,7 @@ class Axis(_Nvd3Customizable):
     )
 
 
-class Legend(_Nvd3Customizable):
+class Legend(_Model):
 
     _option_names = (
         "width",
@@ -144,7 +141,7 @@ class Legend(_Nvd3Customizable):
     )
 
 
-class Tooltip(_Nvd3Customizable):
+class Tooltip(_Model):
 
     _option_names = (
         "duration",
@@ -163,7 +160,7 @@ class Tooltip(_Nvd3Customizable):
     )
 
 
-class Focus(_Nvd3Customizable):
+class Focus(_Model):
 
     _option_names = (
         "width",
@@ -191,7 +188,7 @@ class Focus(_Nvd3Customizable):
     )
 
 
-class Pie(_Nvd3Customizable):
+class Pie(_Model):
 
     _option_names = (
         "arcsRadius",
@@ -319,7 +316,7 @@ class InteractiveGuideline(_Model):
     _raw_options = ()
 
 
-class Chart(_Nvd3Customizable):
+class Chart(_Model):
     # Abstract class
 
     tpl = textwrap.dedent("""\
@@ -336,7 +333,7 @@ class Chart(_Nvd3Customizable):
         }}""")
 
     def __init__(self):
-        _Nvd3Customizable.__init__(self, name="chart")
+        _Model.__init__(self, name="chart")
         self.container_id = "nvd3_chart_" + str(random.randint(0, 2**10))
 
     def js(self):

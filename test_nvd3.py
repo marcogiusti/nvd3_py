@@ -9,7 +9,7 @@ import unittest
 import nvd3
 
 
-class MyCls(nvd3._Nvd3Customizable):
+class MyCls(nvd3._Model):
 
     _option_names = ("a", "b")
     _raw_options = ("a", )
