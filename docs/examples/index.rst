@@ -10,11 +10,11 @@ site`_.
    :maxdepth: 2
 
    simple_line
+   scatter_bubble
    pie_chart
    multi_bar
 
 
-.. TODO: scatter_bubble
 .. TODO: stacked_stream_expanded_area
 .. TODO: discrete_bar
 .. TODO: horizontal_grouped_bar

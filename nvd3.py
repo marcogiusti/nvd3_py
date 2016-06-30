@@ -228,6 +228,59 @@ class Pie(_Nvd3Customizable):
     )
 
 
+class Scatter(_Model):
+
+    _option_names = (
+        "width",
+        "height",
+        "xScale",
+        "yScale",
+        "pointScale",
+        "xDomain",
+        "yDomain",
+        "pointDomain",
+        "xRange",
+        "yRange",
+        "pointRange",
+        "forceX",
+        "forceY",
+        "forcePoint",
+        "interactive",
+        "pointActive",
+        "padDataOuter",
+        "padData",
+        "clipEdge",
+        "clipVoronoi",
+        "clipRadius",
+        "showVoronoi",
+        "id",
+        "interactiveUpdateDelay",
+        "showLabels",
+        "x",
+        "y",
+        "pointSize",
+        "pointShape",
+        "margin",
+        "duration",
+        "color",
+        "useVoronoi",
+    )
+    _raw_options = (
+        "x",
+        "y",
+        "pointSize",
+        "pointShape",
+    )
+
+
+class Distribution(_Model):
+
+    _option_names = (
+    )
+    _raw_options = (
+    )
+
+
 class MultiBar(_Model):
 
     _option_names = (
@@ -398,6 +451,53 @@ class LineChart(Chart):
                          ])
 
 
+class ScatterChart(Chart):
+
+    _option_names = (
+        "width",
+        "height",
+        # "container",
+        "showDistX",
+        "showDistY",
+        "showLegend",
+        "showXAxis",
+        "showYAxis",
+        # "defaultState",
+        "noData",
+        "duration",
+        "showLabels",
+        "margin",
+        # "rightAlignYAxis",
+        "color",
+    )
+    _raw_options = (
+        "noData",
+        "color",
+    )
+    factory = "scatterChart"
+
+    def __init__(self):
+        Chart.__init__(self)
+        self.scatter = Scatter(self.name + ".scatter")
+        self.xaxis = Axis(self.name + ".xAxis")
+        self.yaxis = Axis(self.name + ".yAxis")
+        self.legend = Legend(self.name + ".legend")
+        self.distx = Distribution(self.name + ".distX")
+        self.disty = Distribution(self.name + ".distY")
+        self.tooltip = Tooltip(self.name + ".tooltip")
+
+    def js_options(self):
+        return "\n".join([Chart.js_options(self),
+                          self.scatter.js_options(),
+                          self.xaxis.js_options(),
+                          self.yaxis.js_options(),
+                          self.legend.js_options(),
+                          self.distx.js_options(),
+                          self.disty.js_options(),
+                          self.tooltip.js_options()
+                         ])
+
+
 class MultiBarChart(Chart):
 
     _option_names = (
@@ -444,7 +544,6 @@ class MultiBarChart(Chart):
                           self.controls.js_options(),
                           self.tooltip.js_options(),
                          ])
-
 
 
 def _str_dimention(val):
