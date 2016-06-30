@@ -1,12 +1,12 @@
-=========
-Reference
-=========
+===========
+Base models
+===========
 
 
-_Nvd3Customizable
-=================
+_Model
+======
 
-.. class:: nvd3._Nvd3Customizable(name)
+.. class:: nvd3._Model(name)
 
    This class represent a model in NVS3. A model in NVD3 is an object
    with some settable options. These options are callables, to be more
@@ -35,8 +35,8 @@ _Nvd3Customizable
       of function calls to set the properties of the object.
 
 
-Base models
-===========
+NVD3 base models
+================
 
 .. class:: nvd3.Line(name)
 
@@ -218,87 +218,3 @@ Base models
    - ``y``
    - ``color``
    - ``labelType``
-
-
-Charts
-======
-
-.. class:: nvd3.Chart()
-
-   Chart base class. Instantiate the object and set the various
-   properties.
-
-   .. method:: js()
-
-      Returns the JavaScript code that create the relative SVG chart.
-      The whole code is enveloped in a function that accept the data of
-      the chart and return the chart object.
-
-.. class:: nvd3.PieChart()
-
-   Represents a ``nv.models.pieChart()`` in NVD3. Available properties:
-
-   - ``arcsRadius``
-   - ``width``
-   - ``height``
-   - ``showLabels``
-   - ``title``
-   - ``titleOffset``
-   - ``labelThreshold``
-   - ``valueFormat``
-   - ``x``
-   - ``id``
-   - ``endAngle``
-   - ``startAngle``
-   - ``padAngle``
-   - ``cornerRadius``
-   - ``donutRatio``
-   - ``labelsOutside``
-   - ``labelSunbeamLayout``
-   - ``donut``
-   - ``growOnHover``
-   - ``margin``
-   - ``y``
-   - ``color``
-   - ``labelType``
-
-.. class:: nvd3.LineChart()
-
-   Represents a ``nv.models.lineChart()`` in NVD3. Available properties:
-
-   - ``width``
-   - ``height``
-   - ``showLegend``
-   - ``legendPosition``
-   - ``showXAxis``
-   - ``showYAxis``
-   - ``rightAlignYAxis``
-   - ``useInteractiveGuideline``
-   - ``x``
-   - ``y``
-   - ``focusEnable``
-   - ``defaultState``
-   - ``noData``
-   - ``focusHeight``
-   - ``focusShowAxisX``
-   - ``focusShowAxisY``
-   - ``brushExtent``
-   - ``focusMargin``
-   - ``margin``
-   - ``duration``
-   - ``color``
-   - ``interpolate``
-   - ``xTickFormat``
-   - ``yTickFormat``
-
-
-Data suppliers
-==============
-
-.. TODO
-
-
-Containers
-==========
-
-.. TODO

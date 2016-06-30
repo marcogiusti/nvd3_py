@@ -110,7 +110,7 @@ Contents:
 
    examples/index
    django
-   reference
+   reference/index
 
 
 .. _NVD3: http://nvd3.org/
