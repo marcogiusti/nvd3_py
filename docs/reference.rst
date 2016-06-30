@@ -41,18 +41,69 @@ Base models
 .. class:: nvd3.Line(name)
 
    Represents a ``nv.models.line()`` in NVD3. Available properties:
+
+   .. attribute:: width
+
+      :Is raw: false.
+
+   .. attribute:: height
+
+      :Is raw: false.
+
+   .. attribute:: defined
+
+      Allows a line to be not continuous when it is not defined.
+
+      :Is raw: true.
+
+   .. attribute:: interpolate
+
+      Set the interpolation mode. The possible values are listed in the
+      d3's `line.interpolate()`_ documentation. Default: ``'linear'``.
+
+      :Is raw: false.
+
+      .. note:: As now ``interpolate`` accepts only ``str``.
       
-   - ``width``
-   - ``height``
-   - ``defined``
-   - ``interpolate``
-   - ``clipEdge``
-   - ``margin``
-   - ``duration``
-   - ``isArea``
-   - ``x``
-   - ``y``
-   - ``color``
+   .. attribute:: clipEdge
+
+      If ``True``, masks lines within x and y scale.
+
+      :Is raw: false.
+
+   .. attribute:: margin
+
+      :Is raw: false.
+
+   .. attribute:: duration
+
+      :Is raw: false.
+
+   .. attribute:: isArea
+
+      Decides if a line is an area or just a line.
+
+      :Is raw: true.
+
+   .. attribute:: x
+
+      Accessor to get the x value from a data point.
+
+      :Is raw: true.
+
+   .. attribute:: y
+
+      Accessor to get the y value from a data point.
+
+      :Is raw: true.
+
+   .. attribute:: color
+
+      A function that returns a color.
+
+      :Is raw: true.
+
+.. _line.interpolate(): https://github.com/d3/d3-3.x-api-reference/blob/master/SVG-Shapes#line_interpolate
 
 .. class:: nvd3.Axis(name)
 

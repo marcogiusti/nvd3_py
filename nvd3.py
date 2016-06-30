@@ -55,6 +55,7 @@ _Nvd3Customizable = _Model
 class Line(_Nvd3Customizable):
 
     _option_names = (
+        # TODO: scatter
         "width",
         "height",
         "defined",
@@ -68,16 +69,14 @@ class Line(_Nvd3Customizable):
         "color",
         #
         # "strokeWidth",
-        # "getX",
-        # "getY",
         # "dispatch",
     )
     _raw_options = (
+        "defined",
+        "isArea",
         "x",
         "y",
         "color",
-        # "getX",
-        # "getY",
         # "dispatch",
     )
 
