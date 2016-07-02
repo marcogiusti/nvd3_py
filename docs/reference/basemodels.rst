@@ -44,24 +44,26 @@ NVD3 base models
 
    .. attribute:: width
 
-      :Is raw: false.
+      :Is raw: no.
+      :type: ``int``.
 
    .. attribute:: height
 
-      :Is raw: false.
+      :Is raw: no.
+      :type: ``int``.
 
    .. attribute:: defined
 
       Allows a line to be not continuous when it is not defined.
 
-      :Is raw: true.
+      :Is raw: yes.
 
    .. attribute:: interpolate
 
       Set the interpolation mode. The possible values are listed in the
       d3's `line.interpolate()`_ documentation. Default: ``'linear'``.
 
-      :Is raw: false.
+      :Is raw: no.
 
       .. note:: As now ``interpolate`` accepts only ``str``.
       
@@ -69,39 +71,43 @@ NVD3 base models
 
       If ``True``, masks lines within x and y scale.
 
-      :Is raw: false.
+      :Is raw: no.
 
    .. attribute:: margin
 
-      :Is raw: false.
+      Valid keys are: ``top``, ``right``, ``bottom`` and ``left``,
+      values must be ``int``\ s.
+
+      :Is raw: no.
+      :type: ``dict``.
 
    .. attribute:: duration
 
-      :Is raw: false.
+      :Is raw: no.
 
    .. attribute:: isArea
 
       Decides if a line is an area or just a line.
 
-      :Is raw: true.
+      :Is raw: yes.
 
    .. attribute:: x
 
       Accessor to get the x value from a data point.
 
-      :Is raw: true.
+      :Is raw: yes.
 
    .. attribute:: y
 
       Accessor to get the y value from a data point.
 
-      :Is raw: true.
+      :Is raw: yes.
 
    .. attribute:: color
 
       A function that returns a color.
 
-      :Is raw: true.
+      :Is raw: yes.
 
 .. _line.interpolate(): https://github.com/d3/d3-3.x-api-reference/blob/master/SVG-Shapes#line_interpolate
 
@@ -109,31 +115,84 @@ NVD3 base models
 
    Represents a ``nv.models.axis()`` in NVD3. Available properties:
 
-   - ``axisLabelDistance``
-   - ``staggerLabels``
-   - ``rotateLabels``
-   - ``rotateYLabel``
-   - ``showMaxMin``
-   - ``axisLabel``
-   - ``height``
-   - ``ticks``
-   - ``width``
-   - ``fontSize``
-   - ``margin``
-   - ``duration``
-   - ``scale``
-   - ``dispatch``
-   - ``isOrdinal``
-   - ``orient``
-   - ``tickValues``
-   - ``tickSubdivide``
-   - ``tickSize``
-   - ``tickPadding``
-   - ``tickFormat``
-   - ``domain``
-   - ``range``
-   - ``rangeBand``
-   - ``rangeBands``
+   .. attribute:: axisLabelDistance
+
+      :Is raw: no.
+      :type: ``int``.
+
+   .. attribute:: staggerLabels
+
+      :Is raw: no.
+      :type: ``bool``.
+
+   .. attribute:: rotateLabels
+
+      :Is raw: no.
+      :type: ``int``.
+
+   .. attribute:: rotateYLabel
+
+      :Is raw: no.
+      :type: ``bool``.
+
+   .. attribute:: showMaxMin
+
+      :Is raw: no.
+      :type: ``bool``.
+
+   .. attribute:: axisLabel
+
+      :Is raw: no.
+      :type: ``str``.
+
+   .. attribute:: height
+
+      Only used for tickLabel currently.
+
+      :Is raw: no.
+      :type: ``int``.
+
+   .. attribute:: ticks
+
+      Control how ticks are generated for the axis.
+
+      :Is raw: no.
+      :type: ``int``.
+
+      .. TODO: control this
+
+   .. attribute:: width
+
+      Only used for tickLabel currently.
+
+      :Is raw: no.
+      :type: ``int``.
+
+   .. attribute:: fontSize
+
+      :Is raw: no.
+      :type: ``str``.
+
+   .. attribute:: margin
+
+      See :attr:`nvd3.Line.margin` for a valid format.
+
+      :Is raw: no.
+
+   .. attribute:: duration
+   .. attribute:: scale
+   .. attribute:: dispatch
+   .. attribute:: isOrdinal
+   .. attribute:: orient
+   .. attribute:: tickValues
+   .. attribute:: tickSubdivide
+   .. attribute:: tickSize
+   .. attribute:: tickPadding
+   .. attribute:: tickFormat
+   .. attribute:: domain
+   .. attribute:: range
+   .. attribute:: rangeBand
+   .. attribute:: rangeBands
 
 .. class:: nvd3.Legend(name)
 
