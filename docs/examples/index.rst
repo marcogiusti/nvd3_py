@@ -11,11 +11,11 @@ site`_.
 
    simple_line
    scatter_bubble
+   stacked
    pie_chart
    multi_bar
 
 
-.. TODO: stacked_stream_expanded_area
 .. TODO: discrete_bar
 .. TODO: horizontal_grouped_bar
 .. TODO: line_and_bar_combo

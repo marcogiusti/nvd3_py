@@ -11,8 +11,8 @@ import textwrap
 
 
 D3 = "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
-NVD3 = "https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.min.js"
-NVD3_CSS = "https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.min.css"
+NVD3 = "https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.js"
+NVD3_CSS = "https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.css"
 
 
 class Setter(object):
@@ -316,6 +316,29 @@ class InteractiveGuideline(_Model):
     _raw_options = ()
 
 
+class StackedArea(_Model):
+
+    _option_names = (
+        "width",
+        "height",
+        "defined",
+        "clipEdge",
+        "offset",
+        "order",
+        "interpolate",
+        "x",
+        "y",
+        "margin",
+        "color",
+        "style",
+        "duration"
+    )
+    _raw_options = (
+        "x",
+        "y",
+    )
+
+
 class Chart(_Model):
     # Abstract class
 
@@ -491,6 +514,65 @@ class ScatterChart(Chart):
                           self.distx.js_options(),
                           self.disty.js_options(),
                           self.tooltip.js_options()
+                         ])
+
+
+class StackedAreaChart(Chart):
+
+    _option_names = (
+        "width",
+        "height",
+        "showLegend",
+        "showXAxis",
+        "showYAxis",
+        "defaultState",
+        "noData",
+        "showControls",
+        "controlLabels",
+        "controlOptions",
+        "showTotalInTooltip",
+        "totalLabel",
+        "focusEnable",
+        "focusHeight",
+        "brushExtent",
+        "margin",
+        "focusMargin",
+        "duration",
+        "color",
+        "x",
+        "y",
+        "rightAlignYAxis",
+        "useInteractiveGuideline",
+    )
+    _raw_options = (
+        # "noData",
+        # "color",
+        "x",
+        "y",
+    )
+    factory = "stackedAreaChart"
+
+    def __init__(self):
+        Chart.__init__(self)
+        self.stacked = StackedArea(self.name + ".stacked")
+        self.xaxis = Axis(self.name + ".xAxis")
+        self.yaxis = Axis(self.name + ".yAxis")
+        self.legend = Legend(self.name + ".legend")
+        self.controls = Legend(self.name + ".controls")
+        # self.interactiveLayer = nv.interactiveGuideline()
+        self.tooltip = Tooltip(self.name + ".tooltip")
+        # self.focus = nv.models.focus(nv.models.stackedArea())
+
+    def js_options(self):
+        return "\n".join([Chart.js_options(self),
+                          self.stacked.js_options(),
+                          self.xaxis.js_options(),
+                          self.yaxis.js_options(),
+                          self.legend.js_options(),
+                          self.controls.js_options(),
+                          # self.interactiveLayer.js_options(),
+                          self.tooltip.js_options(),
+                          # self.focus.js_options()
                          ])
 
 
