@@ -339,6 +339,34 @@ class StackedArea(_Model):
     )
 
 
+class DiscreteBar(_Model):
+
+    _option_names = (
+        "width",
+        "height",
+        "forceY",
+        "showValues",
+        "x",
+        "y",
+        "xScale",
+        "yScale",
+        "xDomain",
+        "yDomain",
+        "xRange",
+        "yRange",
+        "valueFormat",
+        "id",
+        "rectClass",
+        "margin",
+        "color",
+        "duration"
+    )
+    _raw_option = (
+        "x",
+        "y",
+    )
+
+
 class Chart(_Model):
     # Abstract class
 
@@ -573,6 +601,63 @@ class StackedAreaChart(Chart):
                           # self.interactiveLayer.js_options(),
                           self.tooltip.js_options(),
                           # self.focus.js_options()
+                         ])
+
+
+class DiscreteBarChart(Chart):
+
+    _option_names = (
+        "width",
+        "height",
+        "showLegend",
+        "staggerLabels",
+        "rotateLabels",
+        "wrapLabels",
+        "showXAxis",
+        "showYAxis",
+        "noData",
+        "margin",
+        "duration",
+        "color",
+        "x",
+        "y",
+
+        # "defaultState",
+        # "showControls",
+        # "controlLabels",
+        # "controlOptions",
+        # "showTotalInTooltip",
+        # "totalLabel",
+        # "focusEnable",
+        # "focusHeight",
+        # "brushExtent",
+        # "focusMargin",
+        # "rightAlignYAxis",
+        # "useInteractiveGuideline",
+    )
+    _raw_options = (
+        # "noData",
+        # "color",
+        "x",
+        "y",
+    )
+    factory = "discreteBarChart"
+
+    def __init__(self):
+        Chart.__init__(self)
+        self.discretebar = DiscreteBar(self.name + ".discretebar")
+        self.xAxis = Axis(self.name + ".xAxis")
+        self.yAxis = Axis(self.name + ".yAxis")
+        self.legend = Legend(self.name + ".legend")
+        self.tooltip = Tooltip(self.name + ".tooltip")
+
+    def js_options(self):
+        return "\n".join([Chart.js_options(self),
+                          self.discretebar.js_options(),
+                          self.xAxis.js_options(),
+                          self.yAxis.js_options(),
+                          self.legend.js_options(),
+                          self.tooltip.js_options(),
                          ])
 
 

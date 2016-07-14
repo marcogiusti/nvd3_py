@@ -14,9 +14,9 @@ site`_.
    stacked
    pie_chart
    multi_bar
+   discrete_bar
 
 
-.. TODO: discrete_bar
 .. TODO: horizontal_grouped_bar
 .. TODO: line_and_bar_combo
 .. TODO: cumulative_line
